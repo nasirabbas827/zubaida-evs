@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - My Election System{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Welcome to the Dashboard</h2>
+        <p class="text-center lead">This is where you can Vote For Candidates into Elections.</p>
+
+        <!-- Display the list of elections as Bootstrap cards -->
+        <h3 class="mt-5">Elections:</h3>
+        <div class="row">
+            {% for election in elections %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ election.title }}</h5>
+                            <p class="card-text">Start Date: {{ election.start_date|date:"F d, Y" }}</p>
+                            <p class="card-text">End Date: {{ election.end_date|date:"F d, Y" }}</p>
+                            <p class="card-text">Status: {{ election.status }}</p>
+
+                            <!-- Button to view candidates for the election -->
+                            <a href="{% url 'view_candidates' election.id %}" class="btn btn-primary btn-sm">View Candidates</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Additional Information Section -->
+        <div class="mt-5">
+            <h3>Additional Information:</h3>
+            <p class="lead">Explore the details of ongoing and completed elections. Participate actively in the democratic process by casting your vote.</p>
+            <ul>
+                <li>Stay informed about election dates and results.</li>
+                <li>Review candidate profiles to make informed voting decisions.</li>
+                <li>Make your voice heard through your vote.</li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

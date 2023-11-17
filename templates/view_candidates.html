@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Candidates - My Election System{% endblock %}
+
+{% block content %}
+    <h2>Candidates for Election: {{ election.title }}</h2>
+    <p>Start Date: {{ election.start_date }}</p>
+    <p>End Date: {{ election.end_date }}</p>
+
+   <!-- Display the list of candidates as Bootstrap cards -->
+<div class="row">
+    {% for candidate in candidates %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ candidate.image.url }}" class="card-img-top" alt="{{ candidate.name }} Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ candidate.name }}</h5>
+                    <p class="card-text">Party: {{ candidate.party }}</p>
+                    <p class="card-text">{{ candidate.bio }}</p>
+                    <a href="{% url 'cast_vote' election.id candidate.id %}" class="btn btn-primary">Vote</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+    <!-- Add a link back to the dashboard -->
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+{% endblock %}
